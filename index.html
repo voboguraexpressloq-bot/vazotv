@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAZO TV - ফ্রি IPTV লাইভ টিভি</title>
+    <meta name="description" content="VAZO TV - ১০০০+ ফ্রি লাইভ টিভি চ্যানেল। বাংলা, স্পোর্টস, মুভিজ, নিউজ এবং কিডস চ্যানেল উপভোগ করুন।">
+    <meta name="keywords" content="iptv, live tv, bangla tv, sports, movies, news, kids channels">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="VAZO TV - ফ্রি IPTV লাইভ টিভি">
+    <meta property="og:description" content="১০০০+ ফ্রি লাইভ টিভি চ্যানেল। বাংলা, স্পোর্টস, মুভিজ, নিউজ এবং কিডস চ্যানেল উপভোগ করুন।">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourusername.github.io/vazo-tv">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "VAZO TV",
+      "description": "ফ্রি IPTV লাইভ টিভি স্ট্রিমিং সার্ভিস",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
+    <link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet">
+</head>
+<body class="dark-mode">
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">VAZO TV</h1>
+                <div class="header-controls">
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Ad Banner -->
+    <div class="ad-container">
+        <div id="header-ad" class="ad-banner">
+            <div id="propeller-header">Advertisement</div>
+        </div>
+    </div>
+
+    <main class="container">
+        <section class="search-section">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="চ্যানেল সার্চ করুন..." class="search-input" aria-label="Search channels">
+                <button id="searchBtn" class="search-btn" aria-label="Search">🔍</button>
+            </div>
+            
+            <div class="category-filters" role="tablist">
+                <button class="category-btn active" data-category="all" role="tab">সব চ্যানেল</button>
+                <button class="category-btn" data-category="Bangla" role="tab">বাংলা</button>
+                <button class="category-btn" data-category="Sports" role="tab">স্পোর্টস</button>
+                <button class="category-btn" data-category="Movies" role="tab">মুভিজ</button>
+                <button class="category-btn" data-category="News" role="tab">নিউজ</button>
+                <button class="category-btn" data-category="Kids" role="tab">কিডস</button>
+            </div>
+        </section>
+
+        <section class="player-section" id="playerSection" style="display: none;" aria-live="polite">
+            <div class="video-container">
+                <video 
+                    id="videoPlayer" 
+                    class="video-js vjs-default-skin" 
+                    controls 
+                    preload="auto" 
+                    width="100%" 
+                    height="400"
+                    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%232d2d2d'/%3E%3Ctext x='400' y='200' font-family='Arial' font-size='24' fill='%23ffffff' text-anchor='middle'%3EVAZO TV%3C/text%3E%3C/svg%3E"
+                    aria-label="Video Player">
+                    <p class="vjs-no-js">
+                        আপনার ব্রাউজার JavaScript সাপোর্ট করে না। দয়া করে JavaScript enable করুন।
+                    </p>
+                </video>
+            </div>
+            <div class="player-info">
+                <h3 id="currentChannelName">চ্যানেল নাম</h3>
+                <div id="playerStats" class="player-stats" aria-live="polite"></div>
+            </div>
+
+            <!-- Ad Banner -->
+            <div class="ad-container">
+                <div id="player-ad" class="ad-banner">
+                    <div id="propeller-player">Advertisement</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="channels-section" aria-live="polite">
+            <h2 id="channelsCount">লোডিং চ্যানেল...</h2>
+            <div id="channelsGrid" class="channels-grid" role="grid">
+                <!-- Channels will be loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 VAZO TV. সমস্ত অধিকার সংরক্ষিত।</p>
+            <p class="disclaimer">এই সাইটটি শুধুমাত্র শিক্ষামূলক উদ্দেশ্যে তৈরি করা হয়েছে।</p>
+        </div>
+    </footer>
+
+    <!-- Popup Ad -->
+    <div id="popupAd" class="popup-ad" style="display: none;" role="dialog" aria-label="Advertisement">
+        <div class="popup-content">
+            <button class="close-popup" aria-label="Close popup">&times;</button>
+            <div id="propeller-popup">Advertisement</div>
+        </div>
+    </div>
+
+    <script src="channels.js"></script>
+    <script src="player.js"></script>
+    
+    <!-- Ad Simulation -->
+    <script type="text/javascript">
+        function simulateAds() {
+            const adContainers = ['propeller-header', 'propeller-player', 'propeller-popup'];
+            adContainers.forEach(containerId => {
+                const container = document.getElementById(containerId);
+                if (container) {
+                    container.innerHTML = '<div style="background:#f0f0f0; color:#666; padding:20px; text-align:center; border-radius:4px;">Advertisement<br><small>Propeller Ads</small></div>';
+                }
+            });
+        }
+        
+        // Wait for DOM to be fully loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', simulateAds);
+        } else {
+            simulateAds();
+        }
+    </script>
+</body>
+</html>
